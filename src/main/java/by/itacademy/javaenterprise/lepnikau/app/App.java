@@ -1,13 +1,41 @@
 package by.itacademy.javaenterprise.lepnikau.app;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import by.itacademy.javaenterprise.lepnikau.app.config.SchoolDiaryConfig;
+import by.itacademy.javaenterprise.lepnikau.app.dao.MarkDAO;
+import by.itacademy.javaenterprise.lepnikau.app.entity.Mark;
+import by.itacademy.javaenterprise.lepnikau.app.dao.implement.MarkDAOImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.List;
+
+public class App {
+
+    private static final Logger log = LoggerFactory.getLogger(App.class);
+
+    public static void main(String[] args) {
+
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SchoolDiaryConfig.class);
+
+        MarkDAO markDAO = context.getBean(MarkDAOImpl.class);
+
+
+        getAllPageByPageTest(markDAO, 5, 3);
+    }
+
+    private static void getAllPageByPageTest(MarkDAO dao, int limit, int offset) {
+        StringBuilder sBuilder = new StringBuilder();
+        List<Mark> allPageByPage = dao.getAllPageByPage(limit, offset);
+
+        if (!allPageByPage.isEmpty()) {
+            for (Mark m : allPageByPage) {
+                sBuilder.append("\n").append(m);
+            }
+            sBuilder.append("\n--Page--");
+        }
+
+        log.info(sBuilder.toString());
     }
 }
