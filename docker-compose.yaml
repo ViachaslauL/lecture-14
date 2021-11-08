@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  database:
+    image: mysql:8.0.27
+    hostname: mysql
+    container_name: mysql-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: school_diary
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminPass
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
