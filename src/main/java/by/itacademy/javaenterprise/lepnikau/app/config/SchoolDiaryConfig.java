@@ -41,33 +41,12 @@ public class SchoolDiaryConfig {
     }
 
     @Bean
-    public HikariDataSource hikariDataSource(@Value("${DRIVER_CLASS}") String driver,
-                                             @Value("${DB_URL}") String url,
-                                             @Value("${DB_USER}") String user,
-                                             @Value("${DB_PASSWORD}") String password,
-                                             @Value("${INITIAL_POOL_SIZE}") int initPoolSize,
-                                             @Value("${MAX_POOL_SIZE}") int maxPoolSize) {
-
-        HikariConfig hikariConfig = new HikariConfig();
-
-        hikariConfig.setDriverClassName(driver);
-        hikariConfig.setJdbcUrl(url);
-        hikariConfig.setUsername(user);
-        hikariConfig.setPassword(password);
-        hikariConfig.setMinimumIdle(initPoolSize);
-        hikariConfig.setMaximumPoolSize(maxPoolSize);
-
-        return new HikariDataSource(hikariConfig);
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate(@Autowired @Qualifier("basicDataSource") DataSource dataSource) {
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
     @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(
-            @Autowired @Qualifier("basicDataSource") DataSource dataSource)
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource)
     {
         return new NamedParameterJdbcTemplate(dataSource);
     }
