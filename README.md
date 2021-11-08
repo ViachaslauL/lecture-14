@@ -10,5 +10,5 @@ NOTE: should be used: queryForObject
 
 Additional for 10
 
-6. docker-compose (+) (enter: docker-compose up; mvn clean install; mvn flyway:migrate;)
+6. docker-compose (+) (server: mySQL. Enter: docker-compose up; mvn clean install; mvn flyway:migrate;)
 7. Tests for DAO (-)
