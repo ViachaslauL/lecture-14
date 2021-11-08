@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 
@@ -59,10 +61,14 @@ public class SchoolDiaryConfig {
     }
 
     @Bean
-    public DataSource dataSource(
-            @Autowired
-            @Qualifier("basicDataSource") DataSource dataSource
-    ) {
-        return dataSource;
+    public JdbcTemplate jdbcTemplate(@Autowired @Qualifier("basicDataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(
+            @Autowired @Qualifier("basicDataSource") DataSource dataSource)
+    {
+        return new NamedParameterJdbcTemplate(dataSource);
     }
 }

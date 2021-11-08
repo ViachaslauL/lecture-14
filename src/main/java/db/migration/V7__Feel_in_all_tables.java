@@ -103,9 +103,9 @@ public class V7__Feel_in_all_tables extends BaseJavaMigration {
                 "('10', '9', '1', '2021-10-10')," +
                 "('10', '8', '1', '2021-10-11');");
 
-        try (Statement select = context.getConnection().createStatement()) {
+        try (Statement statement = context.getConnection().createStatement()) {
             for (String s: sql) {
-                select.executeUpdate(s);
+                statement.executeUpdate(s);
             }
         }
     }

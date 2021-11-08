@@ -9,5 +9,6 @@ Hometask lecture 14
 NOTE: should be used: queryForObject
 
 Additional for 10
+
 6. docker-compose (-)
 7. Tests for DAO (-)

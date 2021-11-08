@@ -30,8 +30,8 @@ public class V6__Create_marks_table extends BaseJavaMigration {
 
     @Override
     public void migrate(Context context) throws Exception {
-        try (Statement select = context.getConnection().createStatement()) {
-            select.execute(sql);
+        try (Statement statement = context.getConnection().createStatement()) {
+            statement.execute(sql);
         }
     }
 }
